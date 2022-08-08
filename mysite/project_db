@@ -1,0 +1,1400 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.7 (Debian 13.7-0+deb11u1)
+-- Dumped by pg_dump version 13.7 (Debian 13.7-0+deb11u1)
+
+-- Started on 2022-08-07 14:51:18 MSK
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 207 (class 1259 OID 16757)
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- TOC entry 206 (class 1259 OID 16755)
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3153 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- TOC entry 209 (class 1259 OID 16767)
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id bigint NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- TOC entry 208 (class 1259 OID 16765)
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3154 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- TOC entry 205 (class 1259 OID 16749)
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1259 OID 16747)
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3155 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- TOC entry 211 (class 1259 OID 16775)
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(150) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO postgres;
+
+--
+-- TOC entry 213 (class 1259 OID 16785)
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user_groups (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO postgres;
+
+--
+-- TOC entry 212 (class 1259 OID 16783)
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3156 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_groups_id_seq OWNED BY public.auth_user_groups.id;
+
+
+--
+-- TOC entry 210 (class 1259 OID 16773)
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3157 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_id_seq OWNED BY public.auth_user.id;
+
+
+--
+-- TOC entry 215 (class 1259 OID 16793)
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user_user_permissions (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO postgres;
+
+--
+-- TOC entry 214 (class 1259 OID 16791)
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3158 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_user_user_permissions.id;
+
+
+--
+-- TOC entry 217 (class 1259 OID 16853)
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 16851)
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3159 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- TOC entry 203 (class 1259 OID 16739)
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 16737)
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3160 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- TOC entry 201 (class 1259 OID 16728)
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_migrations (
+    id bigint NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- TOC entry 200 (class 1259 OID 16726)
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3161 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- TOC entry 222 (class 1259 OID 16906)
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16894)
+-- Name: myapp_choice; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.myapp_choice (
+    id bigint NOT NULL,
+    choice_text character varying(200) NOT NULL,
+    question_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.myapp_choice OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16892)
+-- Name: myapp_choice_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.myapp_choice_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.myapp_choice_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3162 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: myapp_choice_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.myapp_choice_id_seq OWNED BY public.myapp_choice.id;
+
+
+--
+-- TOC entry 219 (class 1259 OID 16886)
+-- Name: myapp_question; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.myapp_question (
+    id bigint NOT NULL,
+    question_text character varying(200) NOT NULL,
+    pub_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.myapp_question OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 16884)
+-- Name: myapp_question_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.myapp_question_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.myapp_question_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3163 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: myapp_question_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.myapp_question_id_seq OWNED BY public.myapp_question.id;
+
+
+--
+-- TOC entry 2924 (class 2604 OID 16760)
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- TOC entry 2925 (class 2604 OID 16770)
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- TOC entry 2923 (class 2604 OID 16752)
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- TOC entry 2926 (class 2604 OID 16778)
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
+
+
+--
+-- TOC entry 2927 (class 2604 OID 16788)
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
+
+
+--
+-- TOC entry 2928 (class 2604 OID 16796)
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- TOC entry 2929 (class 2604 OID 16856)
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- TOC entry 2922 (class 2604 OID 16742)
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- TOC entry 2921 (class 2604 OID 16731)
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- TOC entry 2932 (class 2604 OID 16897)
+-- Name: myapp_choice id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.myapp_choice ALTER COLUMN id SET DEFAULT nextval('public.myapp_choice_id_seq'::regclass);
+
+
+--
+-- TOC entry 2931 (class 2604 OID 16889)
+-- Name: myapp_question id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.myapp_question ALTER COLUMN id SET DEFAULT nextval('public.myapp_question_id_seq'::regclass);
+
+
+--
+-- TOC entry 3132 (class 0 OID 16757)
+-- Dependencies: 207
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+2	users_group
+\.
+
+
+--
+-- TOC entry 3134 (class 0 OID 16767)
+-- Dependencies: 209
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+1	2	32
+2	2	25
+3	2	26
+4	2	28
+5	2	29
+6	2	24
+7	2	21
+8	2	22
+9	2	23
+\.
+
+
+--
+-- TOC entry 3130 (class 0 OID 16749)
+-- Dependencies: 205
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add user	4	add_user
+14	Can change user	4	change_user
+15	Can delete user	4	delete_user
+16	Can view user	4	view_user
+17	Can add content type	5	add_contenttype
+18	Can change content type	5	change_contenttype
+19	Can delete content type	5	delete_contenttype
+20	Can view content type	5	view_contenttype
+21	Can add session	6	add_session
+22	Can change session	6	change_session
+23	Can delete session	6	delete_session
+24	Can view session	6	view_session
+25	Can add question	7	add_question
+26	Can change question	7	change_question
+27	Can delete question	7	delete_question
+28	Can view question	7	view_question
+29	Can add choice	8	add_choice
+30	Can change choice	8	change_choice
+31	Can delete choice	8	delete_choice
+32	Can view choice	8	view_choice
+\.
+
+
+--
+-- TOC entry 3136 (class 0 OID 16775)
+-- Dependencies: 211
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+7	pbkdf2_sha256$390000$ZSOclwc7fkJm4vyxI8vtob$280QcGucfzhw0xQiqElo3Tsr+vNZUnnuyXIr1NSDVbA=	2022-08-07 06:57:30+03	f	lex	Lex	Milon	lex@mail.com	t	t	2022-08-06 17:14:18+03
+9	pbkdf2_sha256$390000$prn9h4Z3auSXIG0hMDi8SS$7e3b9Y0nZvx6cEyYUFVcaydeKVsZGObNhQvTsPRtJCg=	2022-08-06 21:04:00+03	f	jon	Jon	Smith		t	t	2022-08-06 20:59:26+03
+6	pbkdf2_sha256$390000$Bu9dSj2Cdgb2zfq5bkvJNA$p/+ntyRI6rdnxVCbjzp+bR7DW1yZ3MZmvrWL4rEpTsY=	2022-08-07 06:56:03.091443+03	f	rik	Riki	Martin	riki@mail.com	t	t	2022-08-06 17:09:08+03
+4	pbkdf2_sha256$390000$xer6PzqsiwTIZmITXjfIR7$EsXqxmGuiJX5hZUEUaa+qloDZhdL5vEjqwBEmiv8+kk=	2022-08-06 16:39:55+03	f	test				t	t	2022-08-06 13:06:54+03
+8	pbkdf2_sha256$390000$9YKCPbgUV0z5V0Ned4FADB$K9u0JVsougoZNuby7G7ovE5RNiyzDgGCepOGVNqJAmA=	2022-08-07 07:34:37.273296+03	f	jim	Jimmi	Page	jim@mail.ru	t	t	2022-08-06 17:15:40+03
+1	pbkdf2_sha256$390000$UXSnrpoDdOEP15328Sk7fp$Ps8bVyT2KOndAnrr3qWjZ1j1peDNPz85FqzRdKhueZg=	2022-08-07 12:33:01.620435+03	t	root				t	t	2022-08-04 09:10:26.715593+03
+\.
+
+
+--
+-- TOC entry 3138 (class 0 OID 16785)
+-- Dependencies: 213
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
+1	6	2
+2	7	2
+3	8	2
+4	9	2
+\.
+
+
+--
+-- TOC entry 3140 (class 0 OID 16793)
+-- Dependencies: 215
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+1	4	32
+2	4	25
+3	4	28
+4	4	29
+5	4	17
+6	4	20
+40	4	26
+41	8	24
+42	8	21
+43	8	22
+44	8	23
+\.
+
+
+--
+-- TOC entry 3142 (class 0 OID 16853)
+-- Dependencies: 217
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2022-08-05 07:16:07.967871+03	4	Как дела?	1	[{"added": {}}]	7	1
+2	2022-08-05 20:11:56.613448+03	1	admin	1	[{"added": {}}]	3	1
+3	2022-08-05 20:12:23.110679+03	1	admin	3		3	1
+4	2022-08-05 20:13:41.146151+03	2	ivan	1	[{"added": {}}]	4	1
+5	2022-08-05 20:14:13.464909+03	2	ivan	2	[]	4	1
+6	2022-08-05 20:16:02.71864+03	2	ivan	3		4	1
+7	2022-08-05 20:23:31.389277+03	2	What's down?	2	[]	7	1
+8	2022-08-05 20:23:45.332762+03	1	What's up?	2	[]	7	1
+9	2022-08-05 20:26:52.835459+03	2	What's down?	2	[{"deleted": {"name": "choice", "object": "Land"}}]	7	1
+10	2022-08-06 12:44:58.14229+03	3	admin	3		4	1
+11	2022-08-06 12:45:51.929356+03	2	Вас устраивает ваш руководитель?	2	[{"changed": {"fields": ["Question text"]}}, {"added": {"name": "choice", "object": "\\u041d\\u0435\\u0442"}}, {"added": {"name": "choice", "object": "\\u041d\\u0435 \\u0437\\u043d\\u0430\\u044e"}}, {"changed": {"name": "choice", "object": "\\u0414\\u0430", "fields": ["Choice text", "Votes"]}}]	7	1
+12	2022-08-06 12:57:50.981152+03	2	Вас устраивает ваш руководитель?	2	[{"changed": {"name": "choice", "object": "\\u0432\\u0430\\u0440 1", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0432\\u0430\\u0440 2", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0432\\u0430\\u0440 3", "fields": ["Choice text"]}}]	7	1
+13	2022-08-06 12:58:09.828557+03	2	Авторизация пользователей	2	[{"changed": {"fields": ["Question text"]}}]	7	1
+14	2022-08-06 13:06:55.177879+03	4	Tom	1	[{"added": {}}]	4	1
+15	2022-08-06 13:10:15.656847+03	4	Tom	2	[]	4	1
+16	2022-08-06 13:11:10.086079+03	4	tom	2	[{"changed": {"fields": ["Username"]}}]	4	1
+17	2022-08-06 13:14:22.577557+03	4	tom	2	[{"changed": {"fields": ["password"]}}]	4	1
+18	2022-08-06 13:49:06.527015+03	2	Авторизация пользователей	2	[]	7	1
+19	2022-08-06 13:51:53.791474+03	4	tom	2	[{"changed": {"fields": ["password"]}}]	4	1
+20	2022-08-06 13:52:52.611606+03	4	tom	2	[{"changed": {"fields": ["Staff status"]}}]	4	1
+21	2022-08-06 13:54:41.396309+03	4	tom	2	[{"changed": {"fields": ["User permissions"]}}]	4	1
+22	2022-08-06 13:57:45.013518+03	5	Добавить фичу с изображениями в приложение	1	[{"added": {}}]	7	4
+23	2022-08-06 14:00:23.771615+03	4	tom	2	[{"changed": {"fields": ["User permissions"]}}]	4	1
+24	2022-08-06 14:13:47.295268+03	4	tom	2	[{"changed": {"fields": ["password"]}}]	4	1
+25	2022-08-06 14:17:54.737409+03	8	Кпить столы	1	[{"added": {}}, {"added": {"name": "choice", "object": "\\u0417\\u0430\\u0432\\u0442\\u0440\\u0430"}}, {"added": {"name": "choice", "object": "\\u041d\\u0430 \\u043d\\u0435\\u0434\\u0435\\u043b\\u0435"}}, {"added": {"name": "choice", "object": "\\u041d\\u0438\\u043a\\u043e\\u0433\\u0434\\u0430"}}]	7	4
+26	2022-08-06 14:20:10.274039+03	2	Авторизация пользователей	3		7	1
+27	2022-08-06 14:25:14.012527+03	4	Решить вопрос	2	[{"changed": {"fields": ["Question text"]}}]	7	1
+28	2022-08-06 14:27:02.51958+03	9	Как поздравим директора?	1	[{"added": {}}, {"added": {"name": "choice", "object": "\\u0411\\u0443\\u043a\\u0435\\u0442"}}, {"added": {"name": "choice", "object": "\\u0411\\u0443\\u0442\\u044b\\u043b\\u043a\\u0430"}}, {"added": {"name": "choice", "object": "\\u041a\\u043e\\u043d\\u0444\\u0435\\u0442\\u044b"}}]	7	1
+29	2022-08-06 14:27:16.916998+03	8	Купить столы	2	[{"changed": {"fields": ["Question text"]}}]	7	1
+30	2022-08-06 14:27:40.761705+03	8	Купить столы	2	[{"added": {"name": "choice", "object": "1"}}, {"added": {"name": "choice", "object": "2"}}]	7	1
+31	2022-08-06 14:28:13.842725+03	8	Купить столы	2	[{"added": {"name": "choice", "object": "3"}}, {"added": {"name": "choice", "object": "4"}}, {"added": {"name": "choice", "object": "5"}}, {"added": {"name": "choice", "object": "6"}}, {"added": {"name": "choice", "object": "7"}}, {"added": {"name": "choice", "object": "8"}}, {"added": {"name": "choice", "object": "9"}}, {"added": {"name": "choice", "object": "10"}}, {"added": {"name": "choice", "object": "11"}}, {"added": {"name": "choice", "object": "12"}}]	7	1
+32	2022-08-06 14:42:44.334247+03	4	tom	2	[{"changed": {"fields": ["User permissions"]}}]	4	1
+33	2022-08-06 14:57:55.607639+03	10	Когда отметим пятницу?	1	[{"added": {}}, {"added": {"name": "choice", "object": "\\u0432 \\u0441\\u0440\\u0435\\u0434\\u0443"}}, {"added": {"name": "choice", "object": "\\u0432 \\u0447\\u0435\\u0442\\u0432\\u0435\\u0440\\u0433"}}, {"added": {"name": "choice", "object": "\\u0432 \\u043f\\u044f\\u0442\\u043d\\u0438\\u0446\\u0443"}}]	7	1
+34	2022-08-06 15:04:04.65247+03	11	Соберёмся в понедельник утром?	1	[{"added": {}}, {"added": {"name": "choice", "object": "\\u043b\\u0443\\u0447\\u0448\\u0435 \\u0432 \\u0447\\u0435\\u0442\\u0432\\u0435\\u0440\\u0433"}}]	7	1
+35	2022-08-06 15:50:35.236579+03	4	tom	2	[{"changed": {"fields": ["User permissions"]}}]	4	1
+36	2022-08-06 15:52:43.319461+03	12	Купим окно?	1	[{"added": {}}, {"added": {"name": "choice", "object": "\\u043e\\u0434\\u043d\\u043e"}}, {"added": {"name": "choice", "object": "\\u0434\\u0432\\u0430"}}, {"added": {"name": "choice", "object": "\\u0442\\u0440\\u0438"}}]	7	4
+37	2022-08-06 16:32:34.738026+03	5	jon	1	[{"added": {}}]	4	1
+38	2022-08-06 16:33:10.330883+03	5	jon	2	[{"changed": {"fields": ["Staff status", "User permissions"]}}]	4	1
+41	2022-08-06 16:38:34.4899+03	4	tom	2	[{"changed": {"fields": ["User permissions"]}}]	4	1
+42	2022-08-06 16:39:45.516385+03	4	tom	2	[{"changed": {"fields": ["User permissions"]}}]	4	1
+43	2022-08-06 17:05:52.777392+03	5	jon	2	[{"changed": {"fields": ["User permissions"]}}]	4	1
+44	2022-08-06 17:08:38.766048+03	2	users_group	1	[{"added": {}}]	3	1
+45	2022-08-06 17:09:08.589211+03	6	rik	1	[{"added": {}}]	4	1
+46	2022-08-06 17:09:25.43889+03	6	rik	2	[{"changed": {"fields": ["Staff status", "Groups"]}}]	4	1
+47	2022-08-06 17:10:26.012323+03	2	users_group	2	[{"changed": {"fields": ["Permissions"]}}]	3	1
+48	2022-08-06 17:11:00.463429+03	8	Купить столы	2	[{"added": {"name": "choice", "object": "13"}}, {"added": {"name": "choice", "object": "15"}}]	7	6
+49	2022-08-06 17:13:12.656188+03	5	jon	3		4	1
+50	2022-08-06 17:13:30.725913+03	4	test	2	[{"changed": {"fields": ["Username"]}}]	4	1
+51	2022-08-06 17:14:18.34246+03	7	lex	1	[{"added": {}}]	4	1
+52	2022-08-06 17:14:33.1862+03	7	lex	2	[{"changed": {"fields": ["Staff status", "Groups"]}}]	4	1
+53	2022-08-06 17:15:41.129231+03	8	jim	1	[{"added": {}}]	4	1
+54	2022-08-06 17:16:29.23661+03	8	jim	2	[{"changed": {"fields": ["First name", "Last name", "Email address", "Groups"]}}]	4	1
+55	2022-08-06 17:16:37.063966+03	8	jim	2	[{"changed": {"fields": ["Staff status"]}}]	4	1
+56	2022-08-06 17:17:26.931127+03	8	Купить столы	2	[{"added": {"name": "choice", "object": "\\u043d\\u0435 \\u043d\\u0443\\u0436\\u043d\\u043e"}}]	7	8
+57	2022-08-06 17:19:11.701225+03	6	rik	2	[{"changed": {"fields": ["First name", "Last name", "Email address"]}}]	4	1
+58	2022-08-06 17:23:29.778668+03	8	Купить столы	2	[]	7	6
+59	2022-08-06 17:24:01.416391+03	13	Когда обед?	1	[{"added": {}}, {"added": {"name": "choice", "object": "\\u0432 10"}}, {"added": {"name": "choice", "object": "\\u0432 12"}}, {"added": {"name": "choice", "object": "\\u0432 14"}}]	7	6
+60	2022-08-06 20:46:33.618932+03	12	Купим окно?	2	[{"added": {"name": "choice", "object": "\\u0441\\u0432\\u043e\\u0439 \\u043a\\u043e\\u043c\\u043c\\u0435\\u043d\\u0442\\u0430\\u0440\\u0438\\u0439"}}]	7	6
+61	2022-08-06 20:47:26.470393+03	14	свой вопрос	1	[{"added": {}}, {"added": {"name": "choice", "object": "\\u043e\\u0434\\u0438\\u043d"}}, {"added": {"name": "choice", "object": "\\u0434\\u0432\\u0430"}}, {"added": {"name": "choice", "object": "\\u0442\\u0440\\u0438"}}]	7	6
+62	2022-08-06 20:58:46.330468+03	7	lex	2	[]	4	1
+63	2022-08-06 20:59:27.063492+03	9	jon	1	[{"added": {}}]	4	1
+64	2022-08-06 20:59:51.010256+03	9	jon	2	[{"changed": {"fields": ["Staff status", "Groups", "Last login"]}}]	4	1
+65	2022-08-06 21:00:43.659996+03	14	свой вопрос	2	[]	7	9
+66	2022-08-06 21:01:06.633815+03	15	куда поедем отдыхать?	1	[{"added": {}}, {"added": {"name": "choice", "object": "\\u043a\\u0438\\u043f\\u0440"}}]	7	9
+67	2022-08-06 21:03:44.886256+03	6	rik	2	[{"changed": {"fields": ["password"]}}]	4	1
+68	2022-08-06 21:03:50.34116+03	6	rik	2	[]	4	1
+69	2022-08-07 06:53:13.37366+03	8	jim	2	[{"changed": {"fields": ["User permissions"]}}]	4	1
+70	2022-08-07 06:55:49.901934+03	2	users_group	2	[{"changed": {"fields": ["Permissions"]}}]	3	1
+71	2022-08-07 06:57:12.431291+03	9	jon	2	[]	4	1
+72	2022-08-07 06:57:22.854+03	7	lex	2	[]	4	1
+73	2022-08-07 12:09:25.684536+03	1	Задача на изменение программного продукта	2	[{"changed": {"fields": ["Question text"]}}, {"changed": {"name": "choice", "object": "\\u043e\\u0431\\u044a\\u0435\\u0434\\u0438\\u043d\\u0438\\u0442\\u044c \\u043c\\u043e\\u0434\\u0443\\u043b\\u0438", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0440\\u0430\\u0437\\u0434\\u0435\\u043b\\u0438\\u0442\\u044c \\u0444\\u0443\\u043d\\u043a\\u0446\\u0438\\u0438 \\u043c\\u043e\\u0434\\u0443\\u043b\\u0435\\u0439", "fields": ["Choice text"]}}]	7	1
+74	2022-08-07 12:10:56.951614+03	4	Согласование доступа администратора к программам и информационным ресурсам	2	[{"changed": {"fields": ["Question text"]}}, {"added": {"name": "choice", "object": "\\u0422\\u0435\\u0441\\u0442\\u0438\\u0440\\u0443\\u0435\\u043c \\u0430\\u0432\\u0442\\u043e\\u043c\\u0430\\u0442\\u0438\\u0447\\u0435\\u0441\\u043a\\u043e\\u0435 \\u0441\\u043e\\u0437\\u0434\\u0430\\u043d\\u0438\\u0435 \\u0437\\u0430\\u0434\\u0430\\u043d\\u0438\\u0439"}}, {"added": {"name": "choice", "object": "\\u0422\\u0435\\u0441\\u0442\\u0438\\u0440\\u0443\\u0435\\u043c \\u0440\\u0443\\u0447\\u043d\\u043e\\u0435 \\u0441\\u043e\\u0437\\u0434\\u0430\\u043d\\u0438\\u0435 \\u0437\\u0430\\u0434\\u0430\\u043d\\u0438\\u0439"}}]	7	1
+75	2022-08-07 12:11:33.78176+03	5	Добавить фичу с изображениями в приложение	2	[{"added": {"name": "choice", "object": "\\u043d\\u0435\\u0431\\u043e\\u043b\\u044c\\u0448\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435"}}, {"added": {"name": "choice", "object": "\\u0441\\u0440\\u0435\\u0434\\u043d\\u0435\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435"}}, {"added": {"name": "choice", "object": "\\u0431\\u043e\\u043b\\u044c\\u0448\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435"}}]	7	1
+76	2022-08-07 12:15:29.1277+03	8	Купить столы	3		7	1
+77	2022-08-07 12:17:13.773216+03	15	куда поедем отдыхать?	2	[{"added": {"name": "choice", "object": "\\u0421\\u043e\\u0447\\u0438"}}, {"added": {"name": "choice", "object": "\\u0413\\u0435\\u043b\\u0435\\u043d\\u0434\\u0436\\u0438\\u043a"}}, {"changed": {"name": "choice", "object": "\\u0410\\u043d\\u0430\\u043f\\u0430", "fields": ["Choice text"]}}]	7	1
+78	2022-08-07 12:17:19.74185+03	15	Куда поедем отдыхать?	2	[{"changed": {"fields": ["Question text"]}}]	7	1
+79	2022-08-07 12:18:16.285003+03	14	Тест сокращенного номера	2	[{"changed": {"fields": ["Question text"]}}, {"changed": {"name": "choice", "object": "\\u0432\\u043e\\u0441\\u0435\\u043c \\u0442\\u0435\\u0441\\u0442\\u043e\\u0432 \\u0441 \\u0438\\u0437\\u043c\\u0435\\u043d\\u0435\\u043d\\u0438\\u0435\\u043c", "fields": ["Choice text"]}}]	7	1
+80	2022-08-07 12:20:49.953405+03	13	Установка принтера на рабочее место Иванова И.	2	[{"changed": {"fields": ["Question text"]}}, {"changed": {"name": "choice", "object": "\\u041f\\u0440\\u043e\\u043b\\u043e\\u0436\\u0438\\u0442\\u044c \\u043a\\u0430\\u0431\\u0435\\u043b\\u044c", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0421\\u043e\\u0437\\u0434\\u0430\\u043d\\u0438\\u0435 \\u0437\\u0430\\u044f\\u0432\\u043a\\u0438 \\u0432 \\u0435\\u0434\\u0438\\u043d\\u043e\\u0439 \\u0441\\u0438\\u0441\\u0442\\u0435\\u043c\\u0435", "fields": ["Choice text"]}}, {"deleted": {"name": "choice", "object": "\\u0432 14"}}]	7	1
+81	2022-08-07 12:21:16.96018+03	12	Купим окно?	2	[{"changed": {"name": "choice", "object": "\\u041e\\u0434\\u043d\\u043e", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0414\\u0432\\u0430", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0417\\u0430\\u043c\\u0435\\u043d\\u0438\\u043c \\u0432\\u0441\\u0435", "fields": ["Choice text"]}}]	7	1
+82	2022-08-07 12:23:08.182675+03	16	Встреча с подрядчиком	1	[{"added": {}}, {"added": {"name": "choice", "object": "\\u041e\\u0431\\u0441\\u0443\\u0436\\u0434\\u0435\\u043d\\u0438\\u0435 \\u043f\\u0440\\u043e\\u0435\\u043a\\u0442\\u0430"}}, {"added": {"name": "choice", "object": "\\u0421\\u043e\\u0433\\u043b\\u0430\\u0441\\u043e\\u0432\\u0430\\u043d\\u0438\\u0435 \\u0434\\u043e\\u043f\\u043e\\u043b\\u043d\\u0438\\u0442\\u0435\\u043b\\u044c\\u043d\\u044b\\u0445 \\u0437\\u0430\\u0442\\u0440\\u0430\\u0442"}}, {"added": {"name": "choice", "object": "\\u041a\\u0430\\u0434\\u0430\\u0441\\u0442\\u0440\\u043e\\u0432\\u044b\\u0439 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441"}}]	7	1
+83	2022-08-07 12:24:12.33602+03	11	Когда проводим планерку?	2	[{"changed": {"fields": ["Question text"]}}, {"added": {"name": "choice", "object": "\\u043f\\u043e\\u043d\\u0435\\u0434\\u0435\\u043b\\u044c\\u043d\\u0438\\u043a"}}, {"added": {"name": "choice", "object": "\\u0432\\u0442\\u043e\\u0440\\u043d\\u0438\\u043a"}}, {"added": {"name": "choice", "object": "\\u0441\\u0440\\u0435\\u0434\\u0430"}}, {"added": {"name": "choice", "object": "\\u043f\\u044f\\u0442\\u043d\\u0438\\u0446\\u0430"}}]	7	1
+84	2022-08-07 12:26:16.621981+03	17	Сделать операции согласно указу №41	1	[{"added": {}}, {"added": {"name": "choice", "object": "\\u043f\\u043b\\u0430\\u043d\\u0438\\u0440\\u043e\\u0432\\u0430\\u043d\\u0438\\u0435"}}, {"added": {"name": "choice", "object": "\\u043f\\u0435\\u0440\\u0435\\u043d\\u043e\\u0441 \\u0441\\u0440\\u043e\\u043a\\u043e\\u0432 \\u0432 \\u0441\\u0432\\u044f\\u0437\\u0438 \\u0441 \\u0437\\u0430\\u0434\\u0435\\u0440\\u0436\\u043a\\u043e\\u0439 \\u043c\\u0430\\u0442\\u0435\\u0440\\u0438\\u0430\\u043b\\u043e\\u0432"}}]	7	1
+85	2022-08-07 12:27:21.344363+03	4	Согласование доступа администратора к программам и информационным ресурсам	2	[{"changed": {"fields": ["Date published"]}}]	7	1
+86	2022-08-07 12:27:50.088051+03	4	Согласование доступа администратора к программам и информационным ресурсам	2	[{"changed": {"fields": ["Date published"]}}]	7	1
+87	2022-08-07 12:29:07.587634+03	15	Куда поедем отдыхать?	2	[{"changed": {"name": "choice", "object": "\\u0422\\u0443\\u0440\\u0446\\u0438\\u044f", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0422\\u0430\\u0448\\u043a\\u0435\\u043d\\u0442", "fields": ["Choice text"]}}]	7	1
+88	2022-08-07 12:29:21.10167+03	1	Задача на изменение программного продукта	2	[{"changed": {"fields": ["Date published"]}}]	7	1
+89	2022-08-07 12:30:50.698916+03	5	Добавить фичу с изображениями в приложение	2	[{"changed": {"fields": ["Date published"]}}]	7	1
+90	2022-08-07 12:33:21.328803+03	9	jon	2	[{"changed": {"fields": ["First name"]}}]	4	1
+91	2022-08-07 12:33:31.384842+03	9	jon	2	[{"changed": {"fields": ["First name"]}}]	4	1
+92	2022-08-07 12:34:03.987073+03	7	lex	2	[{"changed": {"fields": ["First name", "Last name", "Email address"]}}]	4	1
+93	2022-08-07 12:34:26.180216+03	9	jon	2	[{"changed": {"fields": ["Last name"]}}]	4	1
+94	2022-08-07 13:21:08.602521+03	5	Добавить фичу с изображениями в приложение	2	[{"changed": {"name": "choice", "object": "\\u041d\\u0435\\u0431\\u043e\\u043b\\u044c\\u0448\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0421\\u0440\\u0435\\u0434\\u043d\\u0435\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0411\\u043e\\u043b\\u044c\\u0448\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435", "fields": ["Choice text"]}}]	7	1
+95	2022-08-07 13:21:23.925872+03	1	Задача на изменение программного продукта	2	[{"changed": {"name": "choice", "object": "\\u041e\\u0431\\u044a\\u0435\\u0434\\u0438\\u043d\\u0438\\u0442\\u044c \\u043c\\u043e\\u0434\\u0443\\u043b\\u0438", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0420\\u0430\\u0437\\u0434\\u0435\\u043b\\u0438\\u0442\\u044c \\u0444\\u0443\\u043d\\u043a\\u0446\\u0438\\u0438 \\u043c\\u043e\\u0434\\u0443\\u043b\\u0435\\u0439", "fields": ["Choice text"]}}]	7	1
+96	2022-08-07 13:21:41.129645+03	17	Сделать операции согласно указу №41	2	[{"changed": {"name": "choice", "object": "\\u041f\\u043b\\u0430\\u043d\\u0438\\u0440\\u043e\\u0432\\u0430\\u043d\\u0438\\u0435", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u041f\\u0435\\u0440\\u0435\\u043d\\u043e\\u0441 \\u0441\\u0440\\u043e\\u043a\\u043e\\u0432 \\u0432 \\u0441\\u0432\\u044f\\u0437\\u0438 \\u0441 \\u0437\\u0430\\u0434\\u0435\\u0440\\u0436\\u043a\\u043e\\u0439 \\u043c\\u0430\\u0442\\u0435\\u0440\\u0438\\u0430\\u043b\\u043e\\u0432", "fields": ["Choice text"]}}]	7	1
+97	2022-08-07 13:22:21.579344+03	14	Тест сокращенного номера	2	[{"changed": {"name": "choice", "object": "\\u041e\\u0434\\u0438\\u043d", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0414\\u0432\\u0430", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0412\\u043e\\u0441\\u0435\\u043c\\u044c \\u0442\\u0435\\u0441\\u0442\\u043e\\u0432 \\u0441 \\u0438\\u0437\\u043c\\u0435\\u043d\\u0435\\u043d\\u0438\\u0435\\u043c", "fields": ["Choice text"]}}]	7	1
+98	2022-08-07 13:22:54.378163+03	11	Когда проводим планерку?	2	[{"changed": {"name": "choice", "object": "\\u041f\\u043e\\u043d\\u0435\\u0434\\u0435\\u043b\\u044c\\u043d\\u0438\\u043a", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0412\\u0442\\u043e\\u0440\\u043d\\u0438\\u043a", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0421\\u0440\\u0435\\u0434\\u0430", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u041f\\u044f\\u0442\\u043d\\u0438\\u0446\\u0430", "fields": ["Choice text"]}}]	7	1
+99	2022-08-07 13:23:11.755533+03	10	Когда отметим пятницу?	2	[{"changed": {"name": "choice", "object": "\\u0412 \\u0441\\u0440\\u0435\\u0434\\u0443", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0412 \\u0447\\u0435\\u0442\\u0432\\u0435\\u0440\\u0433", "fields": ["Choice text"]}}, {"changed": {"name": "choice", "object": "\\u0412 \\u043f\\u044f\\u0442\\u043d\\u0438\\u0446\\u0443", "fields": ["Choice text"]}}]	7	1
+\.
+
+
+--
+-- TOC entry 3128 (class 0 OID 16739)
+-- Dependencies: 203
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	myapp	question
+8	myapp	choice
+\.
+
+
+--
+-- TOC entry 3126 (class 0 OID 16728)
+-- Dependencies: 201
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2022-08-04 08:13:29.359521+03
+2	auth	0001_initial	2022-08-04 08:13:29.571953+03
+3	admin	0001_initial	2022-08-04 08:13:29.624975+03
+4	admin	0002_logentry_remove_auto_add	2022-08-04 08:13:29.638683+03
+5	admin	0003_logentry_add_action_flag_choices	2022-08-04 08:13:29.652013+03
+6	contenttypes	0002_remove_content_type_name	2022-08-04 08:13:29.695513+03
+7	auth	0002_alter_permission_name_max_length	2022-08-04 08:13:29.709542+03
+8	auth	0003_alter_user_email_max_length	2022-08-04 08:13:29.725924+03
+9	auth	0004_alter_user_username_opts	2022-08-04 08:13:29.73942+03
+10	auth	0005_alter_user_last_login_null	2022-08-04 08:13:29.753368+03
+11	auth	0006_require_contenttypes_0002	2022-08-04 08:13:29.759886+03
+12	auth	0007_alter_validators_add_error_messages	2022-08-04 08:13:29.775094+03
+13	auth	0008_alter_user_username_max_length	2022-08-04 08:13:29.807539+03
+14	auth	0009_alter_user_last_name_max_length	2022-08-04 08:13:29.830333+03
+15	auth	0010_alter_group_name_max_length	2022-08-04 08:13:29.850973+03
+16	auth	0011_update_proxy_permissions	2022-08-04 08:13:29.867685+03
+17	auth	0012_alter_user_first_name_max_length	2022-08-04 08:13:29.884299+03
+18	myapp	0001_initial	2022-08-04 08:13:29.943001+03
+19	sessions	0001_initial	2022-08-04 08:13:29.977696+03
+20	myapp	0002_remove_choice_votes	2022-08-06 14:17:22.358017+03
+\.
+
+
+--
+-- TOC entry 3147 (class 0 OID 16906)
+-- Dependencies: 222
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+6hyle2yyn42rarpmpr8p99iz7t4b3g2w	.eJxVjDsOwyAQBe9CHSHD8k2Z3mdACyzBSYQlY1dR7h5bcpG0M_PemwXc1hq2TkuYMrsywS6_LGJ6UjtEfmC7zzzNbV2myI-En7bzcc70up3t30HFXve1clIkO0RVBBQSSqPxWQN4wJ0bcmSS0WRBFKlg8CCNti5Gq3P0pSj2-QLBszck:1oJU42:WpyrI38OuG0W94x4nHm37Jp87zuS9NL_oZZHlFcZ9aQ	2022-08-18 09:10:34.350446+03
+wbcy3qxgcypx7ckxmhzx628zqh182fje	.eJxVjDsOwjAQBe_iGln-4B8lfc5grb1rHEC2FCcV4u4QKQW0b2bei0XY1hq3QUuckV2YZKffLUF-UNsB3qHdOs-9rcuc-K7wgw4-daTn9XD_DiqM-q0FkikikJIEiN5no41Db43XBhScg1HaO8zSFYlJCyAoimzwJEO2gOz9AekaOD8:1oJean:xo8SjpE5GRsO2NUHHTuyiUlphNyhHGMiBz2eeOKcQ14	2022-08-18 20:25:05.093568+03
+mkt76muhsnk2xcm8k874ogmoi7xta4fv	.eJxVjDsOwjAQBe_iGln-4B8lfc5grb1rHEC2FCcV4u4QKQW0b2bei0XY1hq3QUuckV2YZKffLUF-UNsB3qHdOs-9rcuc-K7wgw4-daTn9XD_DiqM-q0FkikikJIEiN5no41Db43XBhScg1HaO8zSFYlJCyAoimzwJEO2gOz9AekaOD8:1oK0qw:469GQiJqZ6l8h3ksMJq73wcTqliU7GHQHP8jQ2RJrY0	2022-08-19 20:11:14.232815+03
+fy2go09dli9j1hwiwsmym56osi8o2nno	.eJxVjDsOwjAQBe_iGln-4B8lfc5grb1rHEC2FCcV4u4QKQW0b2bei0XY1hq3QUuckV2YZKffLUF-UNsB3qHdOs-9rcuc-K7wgw4-daTn9XD_DiqM-q0FkikikJIEiN5no41Db43XBhScg1HaO8zSFYlJCyAoimzwJEO2gOz9AekaOD8:1oKCMZ:hJPCxuYHk3xSRKYBTNLlrLK_0f5UiCebQ3crou3a0FY	2022-08-20 08:28:39.982492+03
+mvgp8ri4uwk92upd4silxk5lym1js9bg	.eJxVjDsOwjAQBe_iGln-4B8lfc5grb1rHEC2FCcV4u4QKQW0b2bei0XY1hq3QUuckV2YZKffLUF-UNsB3qHdOs-9rcuc-K7wgw4-daTn9XD_DiqM-q0FkikikJIEiN5no41Db43XBhScg1HaO8zSFYlJCyAoimzwJEO2gOz9AekaOD8:1oKceb:7I1RjuVumaQVMFH_g-k1D91_fN6uTeudKjmUzW1w8DY	2022-08-21 12:33:01.625402+03
+\.
+
+
+--
+-- TOC entry 3146 (class 0 OID 16894)
+-- Dependencies: 221
+-- Data for Name: myapp_choice; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.myapp_choice (id, choice_text, question_id) FROM stdin;
+56	Большое изображение	5
+7	Объединить модули	1
+9	Разделить функции модулей	1
+66	Планирование	17
+67	Перенос сроков в связи с задержкой материалов	17
+48	Один	14
+49	Два	14
+50	Восемь тестов с изменением	14
+62	Понедельник	11
+63	Вторник	11
+64	Среда	11
+65	Пятница	11
+34	В среду	10
+35	В четверг	10
+36	В пятницу	10
+19	Букет	9
+20	Бутылка	9
+21	Конфеты	9
+52	Тестируем автоматическое создание заданий	4
+53	Тестируем ручное создание заданий	4
+57	Сочи	15
+44	Проложить кабель	13
+45	Создание заявки в единой системе	13
+38	Одно	12
+39	Два	12
+47	Заменим все	12
+59	Обсуждение проекта	16
+60	Согласование дополнительных затрат	16
+61	Кадастровый вопрос	16
+51	Турция	15
+58	Ташкент	15
+54	Небольшое изображение	5
+55	Среднее изображение	5
+\.
+
+
+--
+-- TOC entry 3144 (class 0 OID 16886)
+-- Dependencies: 219
+-- Data for Name: myapp_question; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.myapp_question (id, question_text, pub_date) FROM stdin;
+9	Как поздравим директора?	2022-08-06 14:26:57+03
+13	Установка принтера на рабочее место Иванова И.	2022-08-06 17:23:57+03
+12	Купим окно?	2022-08-06 15:52:41+03
+16	Встреча с подрядчиком	2022-08-07 12:23:06+03
+4	Согласование доступа администратора к программам и информационным ресурсам	2022-08-07 12:27:48+03
+15	Куда поедем отдыхать?	2022-08-06 21:01:04+03
+5	Добавить фичу с изображениями в приложение	2022-08-07 12:30:49+03
+1	Задача на изменение программного продукта	2022-08-07 12:29:20+03
+17	Сделать операции согласно указу №41	2022-08-07 12:26:14+03
+14	Тест сокращенного номера	2022-08-06 20:47:20+03
+11	Когда проводим планерку?	2022-08-06 15:03:52+03
+10	Когда отметим пятницу?	2022-08-06 14:57:54+03
+\.
+
+
+--
+-- TOC entry 3164 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 2, true);
+
+
+--
+-- TOC entry 3165 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 9, true);
+
+
+--
+-- TOC entry 3166 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 32, true);
+
+
+--
+-- TOC entry 3167 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 4, true);
+
+
+--
+-- TOC entry 3168 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 9, true);
+
+
+--
+-- TOC entry 3169 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 44, true);
+
+
+--
+-- TOC entry 3170 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 99, true);
+
+
+--
+-- TOC entry 3171 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 8, true);
+
+
+--
+-- TOC entry 3172 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 20, true);
+
+
+--
+-- TOC entry 3173 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: myapp_choice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.myapp_choice_id_seq', 67, true);
+
+
+--
+-- TOC entry 3174 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: myapp_question_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.myapp_question_id_seq', 17, true);
+
+
+--
+-- TOC entry 2946 (class 2606 OID 16882)
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 2951 (class 2606 OID 16809)
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- TOC entry 2954 (class 2606 OID 16772)
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2948 (class 2606 OID 16762)
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2941 (class 2606 OID 16800)
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- TOC entry 2943 (class 2606 OID 16754)
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2962 (class 2606 OID 16790)
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2965 (class 2606 OID 16824)
+-- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- TOC entry 2956 (class 2606 OID 16780)
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2968 (class 2606 OID 16798)
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2971 (class 2606 OID 16838)
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- TOC entry 2959 (class 2606 OID 16876)
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- TOC entry 2974 (class 2606 OID 16862)
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2936 (class 2606 OID 16746)
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- TOC entry 2938 (class 2606 OID 16744)
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2934 (class 2606 OID 16736)
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2983 (class 2606 OID 16913)
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- TOC entry 2979 (class 2606 OID 16899)
+-- Name: myapp_choice myapp_choice_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.myapp_choice
+    ADD CONSTRAINT myapp_choice_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2977 (class 2606 OID 16891)
+-- Name: myapp_question myapp_question_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.myapp_question
+    ADD CONSTRAINT myapp_question_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2944 (class 1259 OID 16883)
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- TOC entry 2949 (class 1259 OID 16820)
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- TOC entry 2952 (class 1259 OID 16821)
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- TOC entry 2939 (class 1259 OID 16806)
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- TOC entry 2960 (class 1259 OID 16836)
+-- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_groups_group_id_97559544 ON public.auth_user_groups USING btree (group_id);
+
+
+--
+-- TOC entry 2963 (class 1259 OID 16835)
+-- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_groups_user_id_6a12ed8b ON public.auth_user_groups USING btree (user_id);
+
+
+--
+-- TOC entry 2966 (class 1259 OID 16850)
+-- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id_1fbb5f2c ON public.auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- TOC entry 2969 (class 1259 OID 16849)
+-- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- TOC entry 2957 (class 1259 OID 16877)
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- TOC entry 2972 (class 1259 OID 16873)
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- TOC entry 2975 (class 1259 OID 16874)
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- TOC entry 2981 (class 1259 OID 16915)
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- TOC entry 2984 (class 1259 OID 16914)
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- TOC entry 2980 (class 1259 OID 16905)
+-- Name: myapp_choice_question_id_6149fbd4; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX myapp_choice_question_id_6149fbd4 ON public.myapp_choice USING btree (question_id);
+
+
+--
+-- TOC entry 2987 (class 2606 OID 16815)
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2986 (class 2606 OID 16810)
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2985 (class 2606 OID 16801)
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2989 (class 2606 OID 16830)
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2988 (class 2606 OID 16825)
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2991 (class 2606 OID 16844)
+-- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2990 (class 2606 OID 16839)
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2992 (class 2606 OID 16863)
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2993 (class 2606 OID 16868)
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2994 (class 2606 OID 16900)
+-- Name: myapp_choice myapp_choice_question_id_6149fbd4_fk_myapp_question_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.myapp_choice
+    ADD CONSTRAINT myapp_choice_question_id_6149fbd4_fk_myapp_question_id FOREIGN KEY (question_id) REFERENCES public.myapp_question(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+-- Completed on 2022-08-07 14:51:18 MSK
+
+--
+-- PostgreSQL database dump complete
+--
+

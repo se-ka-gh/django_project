@@ -1,0 +1,33 @@
+{% load static %}
+
+<meta http-equiv="refresh" content="10" >
+
+<link rel="stylesheet" type="text/css" href="{% static 'myapp/style.css' %}">
+
+<p color="white" align="right">
+    <button onclick="window.location.href = 'http://localhost:8000/admin';">Войти</button>
+    <h1 align="center">Dashboard "Вопросы для обсуждения"</h1>
+</p>
+
+{% if latest_question_list %}
+
+    {% for question in latest_question_list %}
+
+<fieldset>
+        <p>{{weekdate}}{{ question.pub_date|time:"H:i" }} - {{ question.pub_date|date:"d M Y"}}</p>
+        <p><b>{{ question.question_text }}</b></p>
+
+        <ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }}</li>
+{% endfor %}
+</ul>
+    </fieldset>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No are available.</p>
+{% endif %}
+
+
+
